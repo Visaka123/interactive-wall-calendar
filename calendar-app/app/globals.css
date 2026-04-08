@@ -1,0 +1,315 @@
+@import "tailwindcss";
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REAL HOUSE INTERIOR WALL
+═══════════════════════════════════════════════════════════════════════════ */
+.wall-bg {
+  min-height: 100vh;
+  position: relative;
+  background-color: #d8d0c4;
+  background-image:
+    radial-gradient(ellipse at 12% 8%,  rgba(255,242,200,0.52) 0%, rgba(240,220,170,0.18) 32%, transparent 58%),
+    radial-gradient(ellipse at 90% 90%, rgba(255,215,140,0.32) 0%, rgba(220,185,110,0.12) 38%, transparent 62%),
+    radial-gradient(ellipse at 0%  100%, rgba(100,80,50,0.14) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 0%,  rgba(100,80,50,0.08) 0%, transparent 35%),
+    repeating-linear-gradient(180deg, transparent 0px, transparent 3px, rgba(160,145,120,0.04) 3px, rgba(160,145,120,0.04) 4px),
+    repeating-linear-gradient(90deg,  transparent 0px, transparent 60px, rgba(190,175,150,0.025) 60px, rgba(190,175,150,0.025) 61px),
+    linear-gradient(168deg, #ddd6c8 0%, #d0c8b8 35%, #c8bfb0 65%, #c2b9aa 100%);
+}
+
+/* Chair rail */
+.wall-bg::after {
+  content: '';
+  position: fixed;
+  top: 58vh; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(to bottom, rgba(200,185,155,0.0) 0%, rgba(160,140,110,0.28) 50%, rgba(200,185,155,0.0) 100%);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  z-index: 1; pointer-events: none;
+}
+
+/* Baseboard */
+.wall-bg::before {
+  content: '';
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 44px;
+  background: linear-gradient(to top, #b0a088 0%, #c4b49a 45%, #d4c8b2 80%, #ddd4c0 100%);
+  box-shadow: 0 -1px 0 rgba(255,245,220,0.45), 0 -4px 14px rgba(0,0,0,0.10);
+  z-index: 2;
+}
+
+.wall-texture {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  background-image:
+    radial-gradient(ellipse at 50% 50%, transparent 48%, rgba(150,130,100,0.18) 100%),
+    repeating-linear-gradient(86deg, transparent 0px, transparent 22px, rgba(170,155,130,0.025) 22px, rgba(170,155,130,0.025) 23px),
+    repeating-linear-gradient(94deg, transparent 0px, transparent 14px, rgba(190,175,150,0.020) 14px, rgba(190,175,150,0.020) 15px);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NAIL
+═══════════════════════════════════════════════════════════════════════════ */
+.wall-nail {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #f0e8d8 0%, #b8a080 28%, #8a6848 62%, #5a3e28 100%);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.62), 0 1px 3px rgba(0,0,0,0.48),
+    inset 0 1px 5px rgba(255,255,255,0.42), inset 0 -2px 4px rgba(0,0,0,0.38);
+  position: relative; z-index: 60; flex-shrink: 0;
+}
+.wall-nail::before {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 13px; height: 2.5px;
+  background: rgba(0,0,0,0.48); border-radius: 2px;
+}
+.wall-nail::after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%) rotate(90deg);
+  width: 13px; height: 2.5px;
+  background: rgba(0,0,0,0.48); border-radius: 2px;
+}
+.nail-shadow {
+  width: 40px; height: 12px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.38) 0%, transparent 70%);
+  filter: blur(5px); margin-top: 3px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CALENDAR CARD
+═══════════════════════════════════════════════════════════════════════════ */
+.calendar-card {
+  position: relative;
+  border-radius: 2px 2px 8px 8px;
+  z-index: 30; will-change: transform;
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.16),
+    0 6px 22px rgba(0,0,0,0.20),
+    0 18px 48px rgba(0,0,0,0.17),
+    0 40px 80px rgba(0,0,0,0.12),
+    -5px 16px 22px rgba(0,0,0,0.08),
+    5px 16px 22px rgba(0,0,0,0.08),
+    inset 0 0 0 1px rgba(255,255,255,0.58),
+    inset 1px 0 0 rgba(255,255,255,0.30),
+    inset -1px 0 0 rgba(0,0,0,0.04);
+  transform: perspective(1600px) rotateX(2.5deg);
+  transform-origin: top center;
+  transition: box-shadow 0.4s ease;
+}
+.calendar-card::after {
+  content: ''; position: absolute;
+  bottom: -6px; left: 5%; right: 5%;
+  height: 12px; background: transparent;
+  box-shadow: 0 7px 16px rgba(0,0,0,0.22);
+  border-radius: 50%; z-index: -1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SWAY
+═══════════════════════════════════════════════════════════════════════════ */
+@keyframes sway {
+  0%   { transform: perspective(1600px) rotateX(2.5deg) rotate(-0.45deg); }
+  22%  { transform: perspective(1600px) rotateX(2.2deg) rotate(0.25deg); }
+  50%  { transform: perspective(1600px) rotateX(2.5deg) rotate(0.45deg); }
+  78%  { transform: perspective(1600px) rotateX(2.2deg) rotate(-0.25deg); }
+  100% { transform: perspective(1600px) rotateX(2.5deg) rotate(-0.45deg); }
+}
+.calendar-sway { animation: sway 8s ease-in-out infinite; }
+.calendar-sway.is-tilting { animation: none; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SPIRAL BINDING
+═══════════════════════════════════════════════════════════════════════════ */
+.spiral-bar {
+  background: linear-gradient(180deg, #3d4a5c 0%, #28333f 55%, #1a2230 100%);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.14);
+}
+.spiral-ring {
+  width: 18px; height: 24px;
+  border-radius: 50% 50% 44% 44% / 54% 54% 46% 46%;
+  background: linear-gradient(145deg, #8898b0 0%, #5a6a82 35%, #3a4a62 70%, #252f3e 100%);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.60),
+    inset 0 1px 3px rgba(255,255,255,0.28),
+    inset 0 -1px 2px rgba(0,0,0,0.45);
+  position: relative; flex-shrink: 0;
+}
+.spiral-ring::after {
+  content: ''; position: absolute;
+  top: 4px; left: 4px; right: 4px; bottom: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3a4860, #181f2c);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.75);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAGE FLIP
+═══════════════════════════════════════════════════════════════════════════ */
+@keyframes flipIn {
+  from { transform: rotateX(-20deg) scaleY(0.90); opacity: 0; filter: brightness(0.75); }
+  to   { transform: rotateX(0deg)   scaleY(1);    opacity: 1; filter: brightness(1); }
+}
+@keyframes flipOut {
+  from { transform: rotateX(0deg)  scaleY(1);    opacity: 1; filter: brightness(1); }
+  to   { transform: rotateX(20deg) scaleY(0.90); opacity: 0; filter: brightness(0.75); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO IMAGE BREATHE
+═══════════════════════════════════════════════════════════════════════════ */
+@keyframes hero-breathe {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.022); }
+}
+.hero-img { animation: hero-breathe 14s ease-in-out infinite; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   JANUARY — SVG snowflake crystals + wind lines (NO emojis)
+═══════════════════════════════════════════════════════════════════════════ */
+@keyframes jan-crystal {
+  0%   { transform: translateY(-30px) translateX(0)   rotate(0deg)   scale(0.5); opacity: 0; }
+  8%   { opacity: 0.9; }
+  88%  { opacity: 0.7; }
+  100% { transform: translateY(320px) translateX(50px) rotate(720deg) scale(1.0); opacity: 0; }
+}
+@keyframes jan-crystal-fast {
+  0%   { transform: translateY(-20px) translateX(0)   rotate(0deg)   scale(0.7); opacity: 0; }
+  6%   { opacity: 1; }
+  100% { transform: translateY(310px) translateX(-45px) rotate(1080deg) scale(0.85); opacity: 0; }
+}
+@keyframes jan-wind {
+  0%   { transform: translateX(-100px) scaleX(0.2); opacity: 0; }
+  12%  { opacity: 0.5; transform: translateX(0) scaleX(1); }
+  100% { transform: translateX(180px) scaleX(0.4); opacity: 0; }
+}
+@keyframes jan-frost {
+  0%,100% { opacity: 0.12; }
+  50%      { opacity: 0.38; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   OCTOBER — SVG leaves + moon glow (NO emojis)
+═══════════════════════════════════════════════════════════════════════════ */
+@keyframes oct-leaf {
+  0%   { transform: translateY(-15px) translateX(0)    rotate(0deg);    opacity: 0; }
+  8%   { opacity: 1; }
+  100% { transform: translateY(310px) translateX(-45px) rotate(-660deg); opacity: 0; }
+}
+@keyframes oct-leaf-b {
+  0%   { transform: translateY(-15px) translateX(0)   rotate(0deg);   opacity: 0; }
+  8%   { opacity: 0.9; }
+  100% { transform: translateY(300px) translateX(38px) rotate(540deg); opacity: 0; }
+}
+@keyframes oct-moon-pulse {
+  0%,100% { opacity: 0.55; filter: drop-shadow(0 0 8px rgba(255,200,80,0.6)); }
+  50%      { opacity: 0.85; filter: drop-shadow(0 0 18px rgba(255,220,100,0.9)); }
+}
+@keyframes oct-fog {
+  0%   { transform: translateX(-60px); opacity: 0; }
+  15%  { opacity: 0.35; }
+  85%  { opacity: 0.25; }
+  100% { transform: translateX(120px); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DECEMBER — SVG snowflakes + star sparkles + light rays (NO emojis)
+═══════════════════════════════════════════════════════════════════════════ */
+@keyframes dec-snow {
+  0%   { transform: translateY(-25px) translateX(0)   rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.85; }
+  100% { transform: translateY(315px) translateX(22px) rotate(480deg); opacity: 0; }
+}
+@keyframes dec-star {
+  0%,100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+  40%      { opacity: 1; transform: scale(1.4) rotate(180deg); }
+  70%      { opacity: 0.7; transform: scale(1.0) rotate(270deg); }
+}
+@keyframes dec-ray {
+  0%,100% { opacity: 0; transform: scaleY(0.3); }
+  50%      { opacity: 0.4; transform: scaleY(1); }
+}
+@keyframes dec-glow {
+  0%,100% { opacity: 0.15; }
+  50%      { opacity: 0.40; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   OTHER MONTHS — generic SVG-based
+═══════════════════════════════════════════════════════════════════════════ */
+@keyframes petal-fall {
+  0%   { transform: translateY(-12px) translateX(0) rotate(0deg);   opacity: 0; }
+  10%  { opacity: 0.85; }
+  100% { transform: translateY(295px) translateX(30px) rotate(680deg); opacity: 0; }
+}
+@keyframes bubble-rise {
+  0%   { transform: translateY(295px) scale(0.4); opacity: 0; }
+  10%  { opacity: 0.6; }
+  100% { transform: translateY(-20px) scale(1.1); opacity: 0; }
+}
+@keyframes sun-ray {
+  0%,100% { opacity: 0.3; transform: rotate(0deg) scaleY(0.8); }
+  50%      { opacity: 0.7; transform: rotate(180deg) scaleY(1.2); }
+}
+@keyframes leaf-fall {
+  0%   { transform: translateY(-12px) translateX(0) rotate(0deg);    opacity: 0; }
+  10%  { opacity: 1; }
+  100% { transform: translateY(295px) translateX(-30px) rotate(-540deg); opacity: 0; }
+}
+
+/* Particle base */
+.particle {
+  position: absolute;
+  pointer-events: none; user-select: none;
+  z-index: 9; line-height: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TIME TRAVEL TOOLTIP
+═══════════════════════════════════════════════════════════════════════════ */
+@keyframes fadeSlideUp {
+  from { transform: translateX(-50%) translateY(10px); opacity: 0; }
+  to   { transform: translateX(-50%) translateY(0);    opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #c0a880; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #a08860; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   WEATHER BADGE
+═══════════════════════════════════════════════════════════════════════════ */
+@keyframes weather-in {
+  from { opacity: 0; transform: translateY(-8px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.weather-badge { animation: weather-in 0.4s ease forwards; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MINI CALENDAR STRIP (prev/next month preview)
+═══════════════════════════════════════════════════════════════════════════ */
+@keyframes strip-in {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.mini-strip { animation: strip-in 0.3s ease forwards; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PROGRESS RING
+═══════════════════════════════════════════════════════════════════════════ */
+@keyframes ring-fill {
+  from { stroke-dashoffset: 100; }
+}
+.progress-ring-circle { transition: stroke-dashoffset 0.8s cubic-bezier(0.4,0,0.2,1); }
